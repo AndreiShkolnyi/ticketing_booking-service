@@ -1,0 +1,20 @@
+services:
+  booking-service:
+    container_name: booking-service
+    image: ticketing/booking-service:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+      - .env.production.local
+    expose:
+      - '9101'
+    volumes:
+      - ../logs/booking:/var/log/services/booking
+    networks:
+      - choncinema
+
+networks:
+  choncinema:
+      external: true
